@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, :except=>[:show]
+  # 管理者のみ削除を行えるようにする
   before_action :admin_user,  only: :destroy
 
   def index
@@ -8,6 +9,8 @@ class UsersController < ApplicationController
   
   def show
         @user = User.find(params[:id])
+        #投稿したマイクロポストをそのページに表示する分取得
+        @microposts = @user.microposts.paginate(page: params[:page])
   end
   
   def destroy
