@@ -195,7 +195,7 @@ footer {
 
 /* microposts */
 
-.microposts{
+.microposts {
   list-style: none;
   margin: 10px 0 0 0;
   
@@ -204,19 +204,18 @@ footer {
     border-top: 1px solid #e8e8e8;
   }
 }
-
 .content {
   display: block;
 }
-.timestamp{
+.timestamp {
   color: $gray-light;
 }
-.gravatar{
+.gravatar {
   float: left;
   margin-right: 10px;
 }
-aside{
-  textarea{
+aside {
+  textarea {
     height: 100px;
     margin-bottom: 5px;
   }
