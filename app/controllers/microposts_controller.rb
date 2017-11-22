@@ -32,7 +32,7 @@ class MicropostsController < ApplicationController
         
         #マイクロポストを見つける際に現在のユーザーに紐づいているものを
         #関連付けを経由して取得
-        def correnct_user
+        def correct_user
             @micropost = current_user.microposts.find_by(id: params[:id])
             redirect_to root_url if @micropost.nil?
         end
