@@ -1,0 +1,19 @@
+<%#= ユーザーのフォロー用フォーム 
+ form_for ⇒ 任意のモデルに基づいたform%を作るときに使う 
+            メリット：post先のurlがいらない @userが新しいときはuser/create 
+            既存の時はuser/updateに勝手に振り分け
+            contollorでオブジェクトの初期化を楽にできる
+            （User.new(user)とするだけで、初期化ができる）
+ form_tag ⇒　modelに基づかないformを作るときに使う
+              窓などに使用 %>
+<%#= followed_idをサーバに送信する必要があるが、
+実現するために、hidden_fieldを使用します。これにより以下の様なフォームのHTMLを生成。
+<input id="followed_relationship_followed_id"
+name="followed_relationship[followed_id]"
+type="hidden" value="3" />
+ここでinputタグは、処理としては存在するもののブラウザ上では見れない。%>
+
+<%= form_for(current_user.relationships.build(followed_id: @user.id)) do |f| %>
+    <div><%= f.hidden_field :followed_id %></div>
+    <%= f.submit "Follow", class: "btn btn-lg btn-primary" %>
+<% end %>

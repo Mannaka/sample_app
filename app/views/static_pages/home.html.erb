@@ -1,8 +1,14 @@
 <% if signed_in? %>
   <div class="row">
     <aside class="col-md-4">
+  <!--HTML5 sectionの役割 ⇒　文書のアウトラインを明示する -
+  　　記事の章分けやパーツ、普通のサイトでもページコンテンツ内の要素一つ一つを
+  　　ラップするようなタグ -->
       <section>
         <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/stats' %>
       </section>
       <section>
         <%= render 'shared/micropost_form' %>

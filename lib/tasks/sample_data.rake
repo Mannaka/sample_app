@@ -1,7 +1,13 @@
 namespace :db do
     desc "Fill database with sample data"
-    
     task populate: :environment do
+        make_users
+        make_microposts
+        make_relationships
+    end
+end
+
+def make_users
         
         #ダミーAdminユーザー
         admin = User.create!(name: "Example User",
@@ -18,6 +24,11 @@ namespace :db do
                          email: email,
                          password: password)
         end        
+
+end
+
+def make_microposts
+
         #ダミーマイクロポスト
 #        users = User.all(limit: 6)
         users = User.limit(6)
@@ -25,5 +36,18 @@ namespace :db do
           content = Faker::Lorem.sentence(5)
           users.each { |user| user.microposts.create!(content: content) }
         end
-    end
 end
+
+def make_relationships
+
+    users = User.all
+    user = users.first
+    
+    #1人目のユーザーに3～51人目をフォローさせる
+    #4～41人目のユーザーに1人目のユーザーをフォローさせる
+    followed_users = users[2..50]
+    followers     = users[3..40]
+    followed_users.each { |followed| user.follow!(followed) }
+    followers.each      { |follower| follower.follow!(user) }
+end
+

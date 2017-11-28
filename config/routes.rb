@@ -2,10 +2,29 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => "registrations"
   }
+  
+  #resources :リソース名　これだけで7つのルーティングができる
+  #(リソース名 /index,/create,/new,/edit,/show,/update,/destroy)
+  
+  resources :users, only: [:show, :index, :destroy] do
+    
+    #該当IDに対するレコードに処理を行うような処理では、memberメソッドを使用
+    # member do
+    # HTTPメソッド名　'アクション名'
+    #IDを指定しない場合はcollectionを使用
+    # collection do
+    # HTTPメソッド名　'アクション名'
+    
+    member do
+      get :following, :followers
+    end
+  end
+  
   get 'users/show'
 
   resources :users, only: [:show, :index, :destroy]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
@@ -13,7 +32,6 @@ Rails.application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/privacy_policy', to: 'static_pages#privacy_policy', via: 'get'
   resources :tasks
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

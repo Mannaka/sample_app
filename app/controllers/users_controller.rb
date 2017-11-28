@@ -19,6 +19,25 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def following
+    #タイトル設定
+    @title = "Following"
+    #ユーザー検索
+    @user = User.find(params[:id])
+    #データの所得およびページネーション
+    @users = @user.followed_users.paginate(page: params[:page])
+    #controllerでのrenderはほかのアクションのテンプレートを丸々使いたいときに使用
+    #この場合はshow_follow(view)を呼び出し  
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+  
   private
   
   def admin_user

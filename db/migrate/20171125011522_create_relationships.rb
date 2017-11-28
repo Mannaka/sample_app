@@ -10,6 +10,5 @@ class CreateRelationships < ActiveRecord::Migration
     add_index :relationships, :followed_id
     # 複合インデックスでユニークに指定　フォロワーとフォローされた組み合わせの一意性を保証
     add_index :relationships, [:follower_id, :followed_id], unique: true
-    
   end
 end

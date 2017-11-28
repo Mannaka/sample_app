@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   #クラス名を指定する必要がある（しないとRailsがデフォルトでReverseRelationshipという
   #存在しないクラスを探しに行く
   has_many :reverse_relationships, foreign_key: "followed_id",
-                                   class_name: "Relationship",
+                                    class_name: "Relationship",
                                     dependent:  :destroy
   
   #followers はRailsが自動で単数形にした名前（Follower_id）という外部キーを見に行く
