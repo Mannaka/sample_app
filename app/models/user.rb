@@ -28,7 +28,9 @@ class User < ActiveRecord::Base
     validates :name,  presence: true, length: { maximum: 50 }
 
   def feed
-    Micropost.where("user_id= ?" , id)
+    #Micropost.where("user_id= ?" , id)
+    #そのユーザーがフォローしているユーザーのマイクロポスト群が取り出せるようにする
+    Micropost.from_users_followed_by(self)
   end
 
   #ステータスをチェックするようなメソッドをモデルに実装して、
