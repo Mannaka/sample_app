@@ -4,10 +4,13 @@ class UsersController < ApplicationController
   before_action :admin_user,  only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+   @users = User.paginate(page: params[:page])
+   
   end
   
   def show
+    #User.find(params[:id])⇒ブラウザから送られてきたIDを取得
+    #ex. User.find(3)の場合は、idが3のレコードを取得する
         @user = User.find(params[:id])
         #投稿したマイクロポストをそのページに表示する分取得
         @microposts = @user.microposts.paginate(page: params[:page])
@@ -17,6 +20,11 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_url
+  end
+
+  def search
+    @users = User.search!(params[:q]).paginate(page: params[:page])
+  
   end
 
   def following

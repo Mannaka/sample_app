@@ -7,7 +7,7 @@
                 <span><%= link_to "view my profile", @user %></span>
                 <span><b>Microposts:</b> <%= @user.microposts.count %></span>
             </section>
-            <section>
+            <section> 
                 <%= render 'shared/stats' %>
                 <% if @users.any? %>
                     <div class="user_avatars">

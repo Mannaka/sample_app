@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   #resources :リソース名　これだけで7つのルーティングができる
   #(リソース名 /index,/create,/new,/edit,/show,/update,/destroy)
   
-  resources :users, only: [:show, :index, :destroy] do
+  resources :users, only: [:show, :index, :destroy ] do
     
     #該当IDに対するレコードに処理を行うような処理では、memberメソッドを使用
     # member do
@@ -14,15 +14,19 @@ Rails.application.routes.draw do
     #IDを指定しない場合はcollectionを使用
     # collection do
     # HTTPメソッド名　'アクション名'
+    collection do
+      post :search
+      
+    end
     
     member do
       get :following, :followers
     end
+    
   end
   
-  get 'users/show'
+#  get 'users/show'
 
-  resources :users, only: [:show, :index, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   
